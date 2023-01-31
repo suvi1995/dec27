@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-               git branch: 'war', url: 'https://github.com/awspandian/DD-22.git'
+               git branch: 'war', url: 'https://github.com/suvi1995/dec27.git'
             }
         }
      	stage('Build') {
@@ -16,7 +16,7 @@ pipeline {
 
             steps {
                 script {
-                    app = docker.build("dockerpandian/wed")
+                    app = docker.build("suvitha/img")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
@@ -27,7 +27,7 @@ pipeline {
 
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'demo-docker') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'demo') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
